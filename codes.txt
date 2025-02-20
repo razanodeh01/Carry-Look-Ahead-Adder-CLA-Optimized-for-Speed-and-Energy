@@ -1,0 +1,236 @@
+** 1-bit: 
+
+VDD vdd 0 DC 3.3
+VGND gnd 0 DC 0
+
+Vg0 g0 0 PULSE(0 3.3 0n 1n 1n 50n 100n)
+Vp0 p0 0 PULSE(0 3.3 20n 1n 1n 50n 100n)
+Vcin cin 0 PULSE(0 3.3 40n 1n 1n 50n 100n)
+
+MNOT1 n_g0 g0 gnd gnd nmos W=5u L=180n
+MNOT2 n_g0 g0 vdd vdd pmos W=10u L=180n
+
+
+MAND1 and1_out p0 gnd gnd nmos W=5u L=180n
+MAND2 and1_out cin gnd gnd nmos W=5u L=180n
+MAND3 and1_out p0 vdd vdd pmos W=10u L=180n
+MAND4 and1_out cin vdd vdd pmos W=10u L=180n
+
+
+MOR1 c1 g0 gnd gnd nmos W=5u L=180n
+MOR2 c1 and1_out gnd gnd nmos W=5u L=180n
+MOR3 c1 g0 vdd vdd pmos W=10u L=180n
+MOR4 c1 and1_out vdd vdd pmos W=10u L=180n
+
+
+Cload c1 0 1f
+
+
+.tran 1n 100n
+
+.model nmos NMOS (LEVEL=1 TOX=100n KP=120u VTO=0.7 LAMBDA=0.02)
+.model pmos PMOS (LEVEL=1 TOX=100n KP=50u VTO=-0.8 LAMBDA=0.02)
+
+
+.include "C:\Users\Admin\Downloads\ee457_cla32\Package\Electric Files\SPICE\kim_models.txt"
+
+.end
+
+
+========================================================================================================================
+
+** 2-bit:
+
+VDD vdd 0 DC 3.3
+VGND gnd 0 DC 0
+
+
+Vg1 g1 0 PULSE(0 3.3 10n 1n 1n 20n 40n)
+Vp1 p1 0 PULSE(0 3.3 15n 1n 1n 25n 50n)
+Vg0 g0 0 PULSE(0 3.3 20n 1n 1n 30n 60n)
+Vcin cin 0 PULSE(0 3.3 25n 1n 1n 35n 70n)
+Vp0 p0 0 PULSE(0 3.3 30n 1n 1n 40n 80n)
+
+
+MNOT1 net1 g1 gnd gnd nmos W=1u L=180n
+MNOT2 net1 g1 vdd vdd pmos W=1u L=180n
+
+MNOT3 net2 p1 gnd gnd nmos W=1u L=180n
+MNOT4 net2 p1 vdd vdd pmos W=1u L=180n
+
+MNOT5 net3 g0 gnd gnd nmos W=1u L=180n
+MNOT6 net3 g0 vdd vdd pmos W=1u L=180n
+
+
+MAND1 net4 p0 cin gnd nmos W=1u L=180n
+MAND2 net4 p0 vdd vdd pmos W=1u L=180n
+
+MAND3 net5 p1 net3 gnd nmos W=1u L=180n
+MAND4 net5 p1 vdd vdd pmos W=1u L=180n
+
+
+MOR1 c2 net1 gnd gnd nmos W=1u L=180n
+MOR2 c2 net4 gnd gnd nmos W=1u L=180n
+MOR3 c2 net1 vdd vdd pmos W=1u L=180n
+MOR4 c2 net4 vdd vdd pmos W=1u L=180n
+
+
+Cload c2 0 10f
+
+
+.tran 1n 100n
+
+
+.model nmos NMOS (LEVEL=1 TOX=100n KP=120u VTO=0.7 LAMBDA=0.02)
+.model pmos PMOS (LEVEL=1 TOX=100n KP=50u VTO=-0.8 LAMBDA=0.02)
+
+.include "C:\Electric\kim_models.txt"
+.end
+
+
+========================================================================================================================
+
+** 3-bit:
+
+Vdd vdd 0 DC 3.3
+Vss gnd 0 DC 0
+
+
+Vp2 p2 0 PULSE(0 3.3 0n 1n 1n 50n 100n)
+Vp1 p1 0 PULSE(0 3.3 10n 1n 1n 50n 100n)
+Vp0 p0 0 PULSE(0 3.3 20n 1n 1n 50n 100n)
+Vg2 g2 0 PULSE(0 3.3 30n 1n 1n 50n 100n)
+Vg1 g1 0 PULSE(0 3.3 40n 1n 1n 50n 100n)
+Vg0 g0 0 PULSE(0 3.3 50n 1n 1n 50n 100n)
+
+Vcin cin 0 PULSE(0 3.3 60n 1n 1n 50n 100n)
+.model nmos NMOS (LEVEL=1 VTO=0.7 KP=100u LAMBDA=0.02)
+.model pmos PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+
+
+Mn1 n1 g2 gnd gnd nmos W=1u L=180n
+Mp1 n1 g2 vdd vdd pmos W=1u L=180n
+Mn2 n2 p2 gnd gnd nmos W=1u L=180n
+Mp2 n2 p2 vdd vdd pmos W=1u L=180n
+Mn3 n3 g1 gnd gnd nmos W=1u L=180n
+Mp3 n3 g1 vdd vdd pmos W=1u L=180n
+Mn4 n4 p1 gnd gnd nmos W=1u L=180n
+Mp4 n4 p1 vdd vdd pmos W=1u L=180n
+Mn5 n5 g0 gnd gnd nmos W=1u L=180n
+Mp5 n5 g0 vdd vdd pmos W=1u L=180n
+
+Mand1 n6 p2 g1 gnd nmos W=1u L=180n
+Mand2 n6 p2 g1 vdd pmos W=1u L=180n
+Mand3 n7 p2 p1 gnd nmos W=1u L=180n
+Mand4 n7 p2 p1 vdd pmos W=1u L=180n
+Mand5 n8 n7 g0 gnd nmos W=1u L=180n
+Mand6 n8 n7 g0 vdd pmos W=1u L=180n
+Mand7 n9 n7 p0 gnd nmos W=1u L=180n
+Mand8 n9 n7 p0 vdd pmos W=1u L=180n
+Mand9 n10 n9 cin gnd nmos W=1u L=180n
+Mand10 n10 n9 cin vdd pmos W=1u L=180n
+
+Mor1 c3 n1 n6 gnd nmos W=1u L=180n
+Mor2 c3 n1 n6 vdd pmos W=1u L=180n
+Mor3 c3 n8 c3 gnd nmos W=1u L=180n
+Mor4 c3 n8 c3 vdd pmos W=1u L=180n
+
+
+.tran 1n 200n
+.include "C:\Electric\kim_models.txt"
+.end
+
+========================================================================================================================
+** 4-bit:
+
+vdd vdd 0 DC 3.3
+vgnd gnd 0 DC 0
+
+va0 a0 0 PULSE(3.3 0 250n 100p 100p 500n 1000n)
+va1 a1 0 PULSE(3.3 0 250n 100p 100p 500n 1000n)
+va2 a2 0 PULSE(3.3 0 250n 100p 100p 500n 1000n)
+va3 a3 0 PULSE(3.3 0 250n 100p 100p 500n 1000n)
+
+vb0 b0 0 PULSE(3.3 0 250n 100p 100p 500n 1000n)
+vb1 b1 0 PULSE(3.3 0 250n 100p 100p 500n 1000n)
+vb2 b2 0 PULSE(3.3 0 250n 100p 100p 500n 1000n)
+vb3 b3 0 PULSE(3.3 0 250n 100p 100p 500n 1000n)
+
+.meas TRAN tr0 TRIG V(s0) VAL=.33 RISE=1 TARG V(s0) VAL=2.97 RISE=1
+.meas TRAN tr1 TRIG V(s1) VAL=.33 RISE=1 TARG V(s1) VAL=2.97 RISE=1
+.meas TRAN tr2 TRIG V(s2) VAL=.33 RISE=1 TARG V(s2) VAL=2.97 RISE=1
+.meas TRAN tr3 TRIG V(s3) VAL=.33 RISE=1 TARG V(s3) VAL=2.97 RISE=1
+.meas TRAN tf0 TRIG V(s0) VAL=2.97 FALL=1 TARG V(s0) VAL=.33 FALL=1
+.meas TRAN tf1 TRIG V(s1) VAL=2.97 FALL=1 TARG V(s1) VAL=.33 FALL=1
+.meas TRAN tf2 TRIG V(s2) VAL=2.97 FALL=1 TARG V(s2) VAL=.33 FALL=1
+.meas TRAN tf3 TRIG V(s3) VAL=2.97 FALL=1 TARG V(s3) VAL=.33 FALL=1
+
+.meas TRAN tplh0 TRIG V(a0) VAL=1.65 RISE=1 TARG V(s0) VAL=1.65 RISE=1
+.meas TRAN tplh1 TRIG V(a1) VAL=1.65 RISE=1 TARG V(s1) VAL=1.65 RISE=1
+.meas TRAN tplh2 TRIG V(a2) VAL=1.65 RISE=1 TARG V(s2) VAL=1.65 RISE=1
+.meas TRAN tplh3 TRIG V(a3) VAL=1.65 RISE=1 TARG V(s3) VAL=1.65 RISE=1
+.meas TRAN tphl0 TRIG V(a0) VAL=1.65 FALL=1 TARG V(s0) VAL=1.65 FALL=1
+.meas TRAN tphl1 TRIG V(a1) VAL=1.65 FALL=1 TARG V(s1) VAL=1.65 FALL=1
+.meas TRAN tphl2 TRIG V(a2) VAL=1.65 FALL=1 TARG V(s2) VAL=1.65 FALL=1
+.meas TRAN tphl3 TRIG V(a3) VAL=1.65 FALL=1 TARG V(s3) VAL=1.65 FALL=1
+
+.tran 1000n
+
+.include "C:\Users\Admin\Downloads\ee457_cla32\Package\Electric Files\SPICE\kim_models.txt"
+
+========================================================================================================================
+** 16-bit:
+
+vdd vdd 0 DC 3.3
+vgnd gnd 0 DC 0
+
+va0 a0 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va1 a1 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va2 a2 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va3 a3 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va4 a4 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va5 a5 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va6 a6 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va7 a7 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va8 a8 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va9 a9 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va10 a10 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va11 a11 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va12 a12 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va13 a13 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va14 a14 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+va15 a15 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+
+vb0 b0 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb1 b1 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb2 b2 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb3 b3 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb4 b4 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb5 b5 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb6 b6 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb7 b7 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb8 b8 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb9 b9 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb10 b10 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb11 b11 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb12 b12 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb13 b13 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb14 b14 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+vb15 b15 0 PULSE(3.3 0 250n 500p 500p 500n 1000n)
+
+.meas TRAN tr0 TRIG V(s0) VAL=.33 RISE=1 TARG V(s0) VAL=2.97 RISE=1
+.meas TRAN tf0 TRIG V(s0) VAL=2.97 FALL=1 TARG V(s0) VAL=.33 FALL=1
+.meas TRAN tr1 TRIG V(s1) VAL=.33 RISE=1 TARG V(s1) VAL=2.97 RISE=1
+.meas TRAN tf1 TRIG V(s1) VAL=2.97 FALL=1 TARG V(s1) VAL=.33 FALL=1
+.meas TRAN tr15 TRIG V(s15) VAL=.33 RISE=1 TARG V(s15) VAL=2.97 RISE=1
+.meas TRAN tf15 TRIG V(s15) VAL=2.97 FALL=1 TARG V(s15) VAL=.33 FALL=1
+
+.meas TRAN tplh0 TRIG V(a0) VAL=1.65 RISE=1 TARG V(s0) VAL=1.65 RISE=1
+.meas TRAN tphl0 TRIG V(a0) VAL=1.65 FALL=1 TARG V(s0) VAL=1.65 FALL=1
+.meas TRAN tplh15 TRIG V(a15) VAL=1.65 RISE=1 TARG V(s15) VAL=1.65 RISE=1
+.meas TRAN tphl15 TRIG V(a15) VAL=1.65 FALL=1 TARG V(s15) VAL=1.65 FALL=1
+
+.options ABSTOL=1n RELTOL=0.01 VNTOL=1u
+
+.tran 0.01n 1000n
+.include C:\Electric\kim_models.txt
