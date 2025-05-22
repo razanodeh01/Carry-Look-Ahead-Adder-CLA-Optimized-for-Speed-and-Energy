@@ -49,7 +49,7 @@ Mathematically, the CLA operates as follows:
   2. Delay is significantly reduced compared to Ripple-Carry Adders due to parallel carry computation.
   3. 16-bit CLA optimally balances speed & energy efficiency.
 
-## 👥 Authors:
+## 👥 Contributors
 1. [**Razan Abdalrahman**](https://github.com/razanodeh01)
 2. [**Masa Itmaizi**](https://github.com/Masa-Itmazi)
 3. [**Katya Kobari**](https://github.com/KatyaKobari)
