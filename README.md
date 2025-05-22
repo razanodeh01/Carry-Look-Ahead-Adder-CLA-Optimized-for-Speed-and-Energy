@@ -1,3 +1,4 @@
+# Carry look ahead adder CLA optimized for speed and energy
 ## 📌 Project Overview
 This project presents a 16-bit Carry Look-Ahead Adder (CLA) optimized for speed and energy efficiency. Unlike traditional adders, the CLA minimizes carry propagation delay using a hierarchical approach with Generate (G) and Propagate (P) signals, leading to fast and low-power addition operations.
 
