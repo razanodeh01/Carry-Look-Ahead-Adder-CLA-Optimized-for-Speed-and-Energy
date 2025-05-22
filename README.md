@@ -43,8 +43,12 @@ Mathematically, the CLA operates as follows:
 
 ![Image](https://github.com/user-attachments/assets/df7d8d3a-50e5-419e-9bd9-13bc4d16178e)
 
-**Key Observations:**
+### Key Observations:
   1. As bit-width increases, power & area scale proportionally.
   2. Delay is significantly reduced compared to Ripple-Carry Adders due to parallel carry computation.
   3. 16-bit CLA optimally balances speed & energy efficiency.
 
+## 👥 Authors:
+1. [**Razan Abdalrahman**](https://github.com/razanodeh01)
+2. [**Masa Itmaizi**](https://github.com/Masa-Itmazi)
+3. [**Katya Kobari**](https://github.com/KatyaKobari)
